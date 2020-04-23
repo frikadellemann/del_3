@@ -13,8 +13,8 @@ import sys
 # behavior).
 
 # Open input and output files, using binary mode (reading/writing bytes).
-infile = open(sys.argv[1], 'rb')
-outfile = open(sys.argv[2], 'wb')
+infile = open('DenGrimmeKælling.txt', 'rb')
+outfile = open('Encoded.txt', 'wb')
 
 # Create the BitReader/BitWriter using these files as input/output.
 bitstreamin = bitIO.BitReader(infile)
