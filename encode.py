@@ -6,15 +6,22 @@ outfile = open('Encoded.txt', 'wb')
 
 bitstreamin = bitIO.BitReader(infile)
 bitstreamout = bitIO.BitWriter(outfile)
+
 i = bitstreamin.readint32bits()
-bitstreamout.writeint32bits(i)
+#lav liste/table add 1 på liste[i]
 
+#lav liste/table
 while True:
-    x = bitstreamin.readbit()
-
+      
+    x = bitstreamin.readint32bits()
+    #add 1 på liste[x]
+    
+    
+    
     if not bitstreamin.readsucces():
-               break
-    bitstreamout.writebit(x)
+               #bitstreamout.writeint32bits(liste)
+                break
+    
 
 bitstreamout.writebit(0)
 bitstreamout.writebit(1)
