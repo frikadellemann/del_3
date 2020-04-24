@@ -7,20 +7,21 @@ outfile = open('Encoded.txt', 'wb')
 bitstreamin = bitIO.BitReader(infile)
 bitstreamout = bitIO.BitWriter(outfile)
 
-i = bitstreamin.readint32bits()
-#lav liste/table add 1 på liste[i]
 
-#lav liste/table
+#lav table og fyld med 0
+table = list()
+for i in range(255):
+    table.append(0)
+
+
 while True:
       
     x = bitstreamin.readint32bits()
-    #add 1 på liste[x]
-    
-    
-    
+    print(x)
     if not bitstreamin.readsucces():
                #bitstreamout.writeint32bits(liste)
                 break
+    
     
 
 bitstreamout.writebit(0)
