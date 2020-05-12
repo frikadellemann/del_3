@@ -24,25 +24,7 @@ def huffman(table):
         e.right = right
         PQHeap.insert(pq, e)
         
-    code = ''
-    dictionary = {}
-    prnt(pq[0], code, dictionary)
-    return dictionary
-
-    
-def prnt(e, code, dictionary):
-    
-    if e.data == None:
-        code += '0'
-        prnt(e.right, code, dictionary)
-        code = code[:-1]
-        code += '1'
-        prnt(e.left, code, dictionary)
-        code = code[:-1]
-    else:
-        #print(code)
-        #print(str(e.key) + ':' + str(e.data))
-        dictionary[e.data] = code
+    return pq
              
     
         
