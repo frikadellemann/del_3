@@ -19,6 +19,7 @@ def huffman(table):
     for i in range(len(table)-1):
         left = PQHeap.extractMin(pq)
         right = PQHeap.extractMin(pq)
+        #print(str(left.data) + ':' + str(right.data))
         e = Element(left.key + right.key, None)
         e.left = left
         e.right = right

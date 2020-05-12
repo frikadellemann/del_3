@@ -2,8 +2,8 @@ import bitIO
 import PQHeap
 import Huffman
 #import sys
-
-infile = open('sample.txt', 'rb')
+inpath = 'text.txt'
+infile = open(inpath, 'rb')
 outfile = open('encoded.txt', 'wb')
 
 bitstreamin = bitIO.BitReader(infile)
@@ -28,30 +28,31 @@ while True:
     if not bitstreamin.readsucces():
             break
     table[x] += 1
+#print(table)
 for i in range(256):
     bitstreamout.writeint32bits(table[i])
+
 bitstreamin.close()
 
 def prnt(e, code, dictionary):
     
     if e.data == None:
         code += '0'
-        prnt(e.right, code, dictionary)
+        prnt(e.left, code, dictionary)
         code = code[:-1]
         code += '1'
-        prnt(e.left, code, dictionary)
+        prnt(e.right, code, dictionary)
         code = code[:-1]
     else:
         dictionary[e.data] = code
 
 pq = Huffman.huffman(table)
-
 code = ''
 dictionary = {}
 prnt(pq[0], code, dictionary)
 
-
-infile = open('sample.txt', 'rb')
+#print(dictionary)
+infile = open(inpath, 'rb')
 bitstreamin = bitIO.BitReader(infile)
 k = 0
 while True:
@@ -64,7 +65,7 @@ while True:
     k += 1
     #print(dictionary[x])
 
-print(k)
+#print(k)
 bitstreamout.writebit(0)
 bitstreamout.writebit(1)
 bitstreamout.close()
