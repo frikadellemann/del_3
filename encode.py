@@ -1,12 +1,13 @@
 ## Emil Blarke (eblar19) and Mads Frederik Larsen (madla15)
 
-#We import the different methods for reading and writing, priority queue and Huffman tree 
+# We import the different methods for reading and writing,
+# priority queue, Huffman tree and system inputs
 import bitIO
 import PQHeap
 import Huffman
 import sys
 
-## TO DO arguments in command prompt
+
 
 # The files are opened in binarymode seen by the 'rb' and 'wb'
 # We stream the files
