@@ -4,39 +4,36 @@
 import bitIO
 import PQHeap
 import Huffman
-#import sys
-
+import sys
 
 ## TO DO arguments in command prompt
 
 # The files are opened in binarymode seen by the 'rb' and 'wb'
 # We stream the files
-inpath = 'sample.txt'
-infile = open(inpath, 'rb')
-outfile = open('encoded.txt', 'wb')
+inPath = sys.argv[1]
+outPath = sys.argv[2]
+
+inFile = open(inPath, 'rb')
+outFile = open(outPath, 'wb')
 
 
-bitstreamin = bitIO.BitReader(infile)
-bitstreamout = bitIO.BitWriter(outfile)
+bitstreamin = bitIO.BitReader(inFile)
+bitstreamout = bitIO.BitWriter(outFile)
 
 # A table with 256 inquires, one for each of the possible bytes
-table = list()
-for i in range(256):
-    table.append(0)
+table = [0] * 256
 
 # Here we populate the frequency table,
-# by incrementing in the table position corresponding to the read byte
-# The while loop continues as long as there is something to read
-# and breaks when file is read through
+# by incrementing the table in the position corresponding to the byte read
+# The while loop continues as long as there are more bytes to read
 
-for x in infile:
-    #x = infile.read(1)
-    print(x[0])
-    print(x)
-##    if not bitstreamin.readsucces():
-##            break
-    table[x[0]] += 1
-print(table)
+
+byte = inFile.read(1)
+while byte != b'':
+    table[byte[0]] += 1
+    byte = inFile.read(1)
+
+
 # Input file is read, and the stream gets closed
 bitstreamin.close()
 
@@ -51,45 +48,41 @@ for i in range(256):
 # a recursive function for writing the Huffman codes of each byte to a dictionary
 def prnt(e, code, dictionary):
     
-    if e.data == None:
+    if len(e.data) == 2:
         code += '0'
-        prnt(e.left, code, dictionary)
+        prnt(e.data[0], code, dictionary)
         code = code[:-1]
         code += '1'
-        prnt(e.right, code, dictionary)
+        prnt(e.data[1], code, dictionary)
         code = code[:-1]
     else:
-        dictionary[e.data] = code
+        dictionary[e.data[0]] = code
 
 # Here the huffman tree is populated from the frequency table
 pq = Huffman.huffman(table)
 
-# codes and dictionary initialized
+# codes and dictionary for 'byte to code' initialized
 code = ''
-dictionary = []
-for i in range(256):
-    dictionary.append(0)
+dictionary = [0] *256
+
 
 # dictionary made
 prnt(pq[0], code, dictionary)
 
 # Input file is reopened, for translation
 # and a new stream is made
-infile = open(inpath, 'rb')
-bitstreamin = bitIO.BitReader(infile)
+inFile = open(inPath, 'rb')
+bitstreamin = bitIO.BitReader(inFile)
 
 # The input file is read again, translated byte wise to Huffman code
 # and the codes are written to the output file
-while True:
-    x = infile.read(1)
-    if not bitstreamin.readsucces():
-            break
-    for i in dictionary[x[0]]:
+byte = inFile.read(1)
+while byte != b'':
+    for i in dictionary[byte[0]]:
         bitstreamout.writebit(int(i))
+    byte = inFile.read(1)
 
 # Finally the streams are closed
-bitstreamout.writebit(0)
-bitstreamout.writebit(1)
 bitstreamout.close()
 bitstreamin.close()
 
