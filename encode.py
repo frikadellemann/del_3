@@ -9,11 +9,12 @@ inpath = 'sample.txt'
 infile = open(inpath, 'rb')
 outfile = open('encoded.txt', 'wb')
 
-
+# streams for input and output file
 bitstreamin = bitIO.BitReader(infile)
 bitstreamout = bitIO.BitWriter(outfile)
 
 # A table with 256 inquires, one for each of the possible bytes
+# all are set to 0 in initilized value
 table = list()
 for i in range(256):
     table.append(0)
