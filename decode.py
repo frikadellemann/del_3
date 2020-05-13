@@ -2,29 +2,35 @@
 import bitIO
 import PQHeap
 import Huffman
-# Here we import the methods for reading and writing
-# the priority que and the huffman tree
+
+# Here we import the methods for reading and writing bits in files
+# and creating the priority queue and the huffman tree
 infile = open('encoded.txt', 'rb')
 outfile = open('decoded.txt', 'wb')
-# The files are opened in binary mode 
-# seen by 'rb' and 'wb'
+
+# The files are opened in binary read or write mode 
+# seen as 'rb' and 'wb'
 bitstreamin = bitIO.BitReader(infile)
 bitstreamout = bitIO.BitWriter(outfile)
-# Streaming from the files
+
+# Streams are created
 table = list()
 totalBytes = 0
+
+# Here we populate the table, from the huffman encoded file
+# We keep track of the number of bytes from the original file
 for i in range(256):
     x = bitstreamin.readint32bits()
     table.append(x)
     totalBytes += x
-# Here we define that we go through all 256 inquries
+
+
 tree = Huffman.huffman(table)
 
-readBytes = 0
+writtenBytes = 0
 position = tree[0]
-# It starts from the root index [0]
-# it sums up the total bytes which it uses to know when
-# it has written all out
+# It starts from the root, which is at index 0 in the list
+# it sums up the total bytes to know when it's done
 while readBytes < totalBytes:
     x = bitstreamin.readbit()
     if x == 0:
@@ -34,7 +40,7 @@ while readBytes < totalBytes:
     if position.data != None:
         bitstreamout._writebits(position.data, 8)
         position = tree[0]
-        readBytes += 1
+        writtenBytes += 1
 ## evt
 ##bitstreamout.writebit(0)
 ##bitstreamout.writebit(1)       
