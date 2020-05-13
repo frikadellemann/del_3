@@ -9,11 +9,8 @@ import sys
 
 # The files are opened in binary read or write mode 
 # seen as 'rb' and 'wb'
-
-## TO DO arguments in command prompt
 inPath = sys.argv[1]
 outPath = sys.argv[2]
-
 inFile = open(inPath, 'rb')
 outFile = open(outPath, 'wb')
 
