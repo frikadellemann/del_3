@@ -1,14 +1,21 @@
-# # Emil Blarke (eblar19) and Mads Frederik Larsen (madla15)
+## Emil Blarke (eblar19) and Mads Frederik Larsen (madla15)
+
+#We import the different methods for reading and writing, priority queue and Huffman tree 
 import bitIO
 import PQHeap
 import Huffman
-# We import the different methods for reading and writing, priority queue and Huffman tree 
+import sys
+
+
+## TO DO arguments in command prompt
+
+# The files are opened in binarymode seen by the 'rb' and 'wb'
+# We stream the files
 inpath = 'sample.txt'
 infile = open(inpath, 'rb')
 outfile = open('encoded.txt', 'wb')
 
-# The files are opened in binarymode seen by the 'rb' and 'wb'
-# We stream the files
+
 bitstreamin = bitIO.BitReader(infile)
 bitstreamout = bitIO.BitWriter(outfile)
 
@@ -17,23 +24,18 @@ table = list()
 for i in range(256):
     table.append(0)
 
-## delete??
-def read(byte):
-    v = 0
-    for i in range(byte*8):
-        v = (v << 1) | bitstreamin.readbit()
-    return v
 # Here we populate the frequency table,
 # by incrementing in the table position corresponding to the read byte
 # The while loop continues as long as there is something to read
 # and breaks when file is read through
 
 while True:
-    x = read(1)
+    x = infile.read(1)
+    print(x[0])
     if not bitstreamin.readsucces():
             break
-    table[x] += 1
-
+    table[x[0]] += 1
+print(table)
 # Input file is read, and the stream gets closed
 bitstreamin.close()
 
@@ -63,7 +65,9 @@ pq = Huffman.huffman(table)
 
 # codes and dictionary initialized
 code = ''
-dictionary = {}
+dictionary = []
+for i in range(256):
+    dictionary.append(0)
 
 # dictionary made
 prnt(pq[0], code, dictionary)
@@ -76,10 +80,10 @@ bitstreamin = bitIO.BitReader(infile)
 # The input file is read again, translated byte wise to Huffman code
 # and the codes are written to the output file
 while True:
-    x = read(1)
+    x = infile.read(1)
     if not bitstreamin.readsucces():
             break
-    for i in dictionary[x]:
+    for i in dictionary[x[0]]:
         bitstreamout.writebit(int(i))
 
 # Finally the streams are closed

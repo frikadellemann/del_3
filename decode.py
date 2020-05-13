@@ -8,6 +8,8 @@ import Huffman
 
 # The files are opened in binary read or write mode 
 # seen as 'rb' and 'wb'
+
+## TO DO arguments in command prompt
 infile = open('encoded.txt', 'rb')
 outfile = open('decoded.txt', 'wb')
 
