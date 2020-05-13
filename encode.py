@@ -13,7 +13,6 @@ import sys
 inPath = sys.argv[1]
 outPath = sys.argv[2]
 
-<<<<<<< HEAD
 inFile = open(inPath, 'rb')
 outFile = open(outPath, 'wb')
 
@@ -24,7 +23,7 @@ bitstreamout = bitIO.BitWriter(outFile)
 # A table with 256 inquires, one for each of the possible bytes
 table = [0] * 256
 
-=======
+
 # streams for input and output file
 bitstreamin = bitIO.BitReader(infile)
 bitstreamout = bitIO.BitWriter(outfile)
@@ -41,7 +40,19 @@ def read(byte):
     for i in range(byte*8):
         v = (v << 1) | bitstreamin.readbit()
     return v
->>>>>>> fca0a1f892498852470ed6232fc5aa0ae3b13871
+
+
+inFile = open(inPath, 'rb')
+outFile = open(outPath, 'wb')
+
+
+bitstreamin = bitIO.BitReader(inFile)
+bitstreamout = bitIO.BitWriter(outFile)
+
+# A table with 256 inquires, one for each of the possible bytes
+table = [0] * 256
+
+
 # Here we populate the frequency table,
 # by incrementing the table in the position corresponding to the byte read
 # The while loop continues as long as there are more bytes to read
@@ -60,9 +71,6 @@ bitstreamin.close()
 for i in range(256):
     bitstreamout.writeint32bits(table[i])
 
-#
-#
-#
 
 # a recursive function for writing the Huffman codes of each byte to a dictionary
 def prnt(e, code, dictionary):
