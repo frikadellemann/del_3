@@ -1,14 +1,15 @@
 # # Emil Blarke (eblar19) and Mads Frederik Larsen (madla15)
+# We import the different methods for reading and writing, priority queue and Huffman tree 
 import bitIO
 import PQHeap
 import Huffman
-# We import the different methods for reading and writing, priority queue and Huffman tree 
+# The files are opened in binarymode seen by the 'rb' and 'wb'
+# We stream the files
 inpath = 'sample.txt'
 infile = open(inpath, 'rb')
 outfile = open('encoded.txt', 'wb')
 
-# The files are opened in binarymode seen by the 'rb' and 'wb'
-# We stream the files
+
 bitstreamin = bitIO.BitReader(infile)
 bitstreamout = bitIO.BitWriter(outfile)
 
