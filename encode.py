@@ -7,16 +7,15 @@ import Huffman
 import sys
 
 ## TO DO arguments in command prompt
-
-# The files are opened in binarymode seen by the 'rb' and 'wb'
-# We stream the files
 inPath = sys.argv[1]
 outPath = sys.argv[2]
 
+# The files are opened in binarymode seen by the 'rb' and 'wb'
 inFile = open(inPath, 'rb')
 outFile = open(outPath, 'wb')
 
 
+# streams for input and output file
 bitstreamin = bitIO.BitReader(inFile)
 bitstreamout = bitIO.BitWriter(outFile)
 
@@ -30,7 +29,7 @@ bitstreamin = bitIO.BitReader(inFile)
 bitstreamout = bitIO.BitWriter(outFile)
 
 # A table with 256 inquires, one for each of the possible bytes
-# all are set to 0 in initilized value
+# all are set to 0 by appending 0 to all indexes
 table = list()
 for i in range(256):
     table.append(0)
