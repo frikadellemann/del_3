@@ -42,10 +42,6 @@ bitstreamin.close()
 for i in range(256):
     bitstreamout.writeint32bits(table[i])
 
-#
-#
-#
-
 # a recursive function for writing the Huffman codes of each byte to a dictionary
 def prnt(e, code, dictionary):
     
