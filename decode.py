@@ -7,13 +7,12 @@ import PQHeap
 import Huffman
 import sys
 
-# The files are opened in binary read or write mode 
-# seen as 'rb' and 'wb'
-
 ## TO DO arguments in command prompt
 inPath = sys.argv[1]
 outPath = sys.argv[2]
 
+# The files are opened in binary read or write mode 
+# seen as 'rb' and 'wb'
 inFile = open(inPath, 'rb')
 outFile = open(outPath, 'wb')
 
@@ -21,7 +20,7 @@ outFile = open(outPath, 'wb')
 bitstreamin = bitIO.BitReader(inFile)
 bitstreamout = bitIO.BitWriter(outFile)
 
-
+# counting list for track-keeping
 table = list()
 totalBytes = 0
 
@@ -38,7 +37,7 @@ tree = Huffman.huffman(table)
 writtenBytes = 0
 position = tree[0]
 # It starts from the root, which is at index 0 in the list
-# it sums up the written bytes to know when it's done
+# it sums up the written bytes to know when it's done writing
 while writtenBytes < totalBytes:
     x = bitstreamin.readbit()
     if x == 0:
