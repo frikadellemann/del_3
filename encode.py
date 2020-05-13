@@ -4,7 +4,7 @@
 import bitIO
 import PQHeap
 import Huffman
-import sys
+#import sys
 
 
 ## TO DO arguments in command prompt
@@ -29,11 +29,12 @@ for i in range(256):
 # The while loop continues as long as there is something to read
 # and breaks when file is read through
 
-while True:
-    x = infile.read(1)
+for x in infile:
+    #x = infile.read(1)
     print(x[0])
-    if not bitstreamin.readsucces():
-            break
+    print(x)
+##    if not bitstreamin.readsucces():
+##            break
     table[x[0]] += 1
 print(table)
 # Input file is read, and the stream gets closed

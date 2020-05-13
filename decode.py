@@ -35,7 +35,7 @@ writtenBytes = 0
 position = tree[0]
 # It starts from the root, which is at index 0 in the list
 # it sums up the written bytes to know when it's done
-while readBytes < totalBytes:
+while writtenBytes < totalBytes:
     x = bitstreamin.readbit()
     if x == 0:
         position = position.left
