@@ -16,14 +16,12 @@ def huffman(table):
     pq = []
     # Filling priority queue
     for i in range(len(table)):
-        PQHeap.insert(pq, Element(table[i],i))
+        PQHeap.insert(pq, Element(table[i],[i]))
     # 
     for i in range(len(table)-1):
         left = PQHeap.extractMin(pq)
         right = PQHeap.extractMin(pq)
-        e = Element(left.key + right.key, None)
-        e.left = left
-        e.right = right
+        e = Element(left.key + right.key, [left,right])
         PQHeap.insert(pq, e)
 
     return pq

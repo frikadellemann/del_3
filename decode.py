@@ -5,17 +5,21 @@
 import bitIO
 import PQHeap
 import Huffman
+import sys
 
 # The files are opened in binary read or write mode 
 # seen as 'rb' and 'wb'
 
 ## TO DO arguments in command prompt
-infile = open('encoded.txt', 'rb')
-outfile = open('decoded.txt', 'wb')
+inPath = sys.argv[1]
+outPath = sys.argv[2]
+
+inFile = open(inPath, 'rb')
+outFile = open(outPath, 'wb')
 
 # Streams are created
-bitstreamin = bitIO.BitReader(infile)
-bitstreamout = bitIO.BitWriter(outfile)
+bitstreamin = bitIO.BitReader(inFile)
+bitstreamout = bitIO.BitWriter(outFile)
 
 
 table = list()
@@ -38,16 +42,14 @@ position = tree[0]
 while writtenBytes < totalBytes:
     x = bitstreamin.readbit()
     if x == 0:
-        position = position.left
+        position = position.data[0]
     else:
-        position = position.right
-    if position.data != None:
-        bitstreamout._writebits(position.data, 8)
+        position = position.data[1]
+    if len(position.data) == 1:
+        bitstreamout._writebits(position.data[0], 8)
         position = tree[0]
         writtenBytes += 1
-## evt
-##bitstreamout.writebit(0)
-##bitstreamout.writebit(1)       
+    
 bitstreamout.close()
 bitstreamin.close()
 

@@ -13,6 +13,7 @@ import sys
 inPath = sys.argv[1]
 outPath = sys.argv[2]
 
+<<<<<<< HEAD
 inFile = open(inPath, 'rb')
 outFile = open(outPath, 'wb')
 
@@ -23,6 +24,24 @@ bitstreamout = bitIO.BitWriter(outFile)
 # A table with 256 inquires, one for each of the possible bytes
 table = [0] * 256
 
+=======
+# streams for input and output file
+bitstreamin = bitIO.BitReader(infile)
+bitstreamout = bitIO.BitWriter(outfile)
+
+# A table with 256 inquires, one for each of the possible bytes
+# all are set to 0 in initilized value
+table = list()
+for i in range(256):
+    table.append(0)
+
+## delete??
+def read(byte):
+    v = 0
+    for i in range(byte*8):
+        v = (v << 1) | bitstreamin.readbit()
+    return v
+>>>>>>> fca0a1f892498852470ed6232fc5aa0ae3b13871
 # Here we populate the frequency table,
 # by incrementing the table in the position corresponding to the byte read
 # The while loop continues as long as there are more bytes to read
