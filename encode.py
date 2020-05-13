@@ -20,13 +20,14 @@ outFile = open(outPath, 'wb')
 bitstreamin = bitIO.BitReader(inFile)
 bitstreamout = bitIO.BitWriter(outFile)
 
+
 # A table with 256 inquires, one for each of the possible bytes
 table = [0] * 256
 
 
 # streams for input and output file
-bitstreamin = bitIO.BitReader(infile)
-bitstreamout = bitIO.BitWriter(outfile)
+bitstreamin = bitIO.BitReader(inFile)
+bitstreamout = bitIO.BitWriter(outFile)
 
 # A table with 256 inquires, one for each of the possible bytes
 # all are set to 0 in initilized value
@@ -40,7 +41,6 @@ def read(byte):
     for i in range(byte*8):
         v = (v << 1) | bitstreamin.readbit()
     return v
-
 
 inFile = open(inPath, 'rb')
 outFile = open(outPath, 'wb')
@@ -71,6 +71,9 @@ bitstreamin.close()
 for i in range(256):
     bitstreamout.writeint32bits(table[i])
 
+#
+#
+#
 
 # a recursive function for writing the Huffman codes of each byte to a dictionary
 def prnt(e, code, dictionary):
