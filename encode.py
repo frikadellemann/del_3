@@ -1,3 +1,4 @@
+# # Emil Blarke (eblar19) and Mads Frederik Larsen (madla15)
 import bitIO
 import PQHeap
 import Huffman
