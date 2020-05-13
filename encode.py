@@ -28,8 +28,6 @@ table = [0] * 256
 # Here we populate the frequency table,
 # by incrementing the table in the position corresponding to the byte read
 # The while loop continues as long as there are more bytes to read
-
-
 byte = inFile.read(1)
 while byte != b'':
     table[byte[0]] += 1
